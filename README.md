@@ -4,4 +4,5 @@ Goals of this project include using a Raspberry Pi to host python code that take
 # Begin Logged Work
 
 ### 2/9/26
-* setup GITHUB repository and began research
+* setup GITHUB repository and began research 
+* Worked on and completed prototype MACD algorithm
