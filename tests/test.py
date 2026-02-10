@@ -1,6 +1,6 @@
 import yfinance as yf
 import pandas as pd
-from MACD import macd
+from testMACD import macd
 
 google = yf.Ticker("GOOG")
 data = google.history()
