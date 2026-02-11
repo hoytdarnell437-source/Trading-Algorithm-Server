@@ -2,12 +2,12 @@
 
 def macd(price: float, prevMACD: float, prevSignal: float):
     # macd function implementation
-    ema12 = ema(price, "ema12", 12)
-    ema26 = ema(price, "ema26", 26)
+    ema12 = ema(price, "ema12", 9)
+    ema26 = ema(price, "ema26", 17)
     
     difference12_26 = ema12 - ema26
     results = difference12_26
-    signal = ema(results, "signal", 9)
+    signal = ema(results, "signal", 8)
 
     if (prevMACD <= prevSignal) and (results > signal):
         action = 2
