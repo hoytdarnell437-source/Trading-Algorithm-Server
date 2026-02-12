@@ -8,7 +8,7 @@ def trade(price: float, capital: float, signal: int, plotObject, iteration: int)
         plotObject.scatter(iteration, price, color='red',marker='v')
         hasBought = False
         return priceChange
-    elif not hasBought: # buy
+    elif signal == 2 and (not hasBought): # buy
         shares = capital / price
         plotObject.scatter(iteration, price, color='green',marker='^')
         hasBought = True

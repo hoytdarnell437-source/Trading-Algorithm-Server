@@ -1,3 +1,4 @@
+# main loop for Testing Trend Direction Methods. Currently utilizing MACD algorithm
 # import libraries
 import yfinance as yf
 import pandas as pd
@@ -12,8 +13,8 @@ from testTrade import trade
 
 while True:
 
+    # import stock data
     stockSymbol = input("Input stock symbol: ")
-
     data = yf.download(stockSymbol, start="2024-02-11", end="2026-02-11") # CHANGE THESE DATES FOR TESTING TIMEFRAMES 
     closePrices = data["Close"][stockSymbol].tolist()
     highPrices = data["High"][stockSymbol].tolist()
@@ -25,34 +26,34 @@ while True:
     startingCapital = 1000
     capital = 1000 # in dollars
     risk = 1 # percent
-    macdSensitivity = 3
+    macdSensitivity = 0
 
+    # graphing setup
     x = np.linspace(0, len(prices), len(prices), True)
     fig, ax = plt.subplots()
 
-    startPrice = prices[0]
+    # loop variables
     totalChange = 0
-    atrResults = 1
-    high = 0
-    y2 = []
-    y3 = []
-
     i = 0
+
+    # main calculation loop
     for price in prices:
         # calculate macd
         action = macd(price, macdSensitivity)
-        riskPerTrade = capital * risk * 0.01
         
         # send action to trade function
         if i > 30 and action != 0:
-            capital += trade(price, capital + totalChange, action, ax, i)
+            capital += trade(price, capital, action, ax, i)
+        elif i == (len(prices) - 1):
+            capital += trade(price, capital, 1, ax, i) # ensure the stocks are sold on last iteration
 
         i += 1
 
     totalChange = capital - startingCapital
 
+    # output data on graph and in terminal
     print("Stock: ", stockSymbol)
     print("Percent Gain in Asset Value: ", f"{(100 * totalChange / startingCapital):.2f}", "%")
-    print("Percent Gain in Stock Value: ", f"{(100 * (prices[-1] - startPrice) / startPrice):.2f}", "%")
+    print("Percent Gain in Stock Value: ", f"{(100 * (prices[-1] - prices[0]) / prices[0]):.2f}", "%")
     ax.plot(x, prices)
     plt.show()
