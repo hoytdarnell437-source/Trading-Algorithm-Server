@@ -1,3 +1,4 @@
+# TODO remove loop from this function
 def rsi(prices: list[float], period: int = 14):
     totalGain = 0
     totalLoss = 0
