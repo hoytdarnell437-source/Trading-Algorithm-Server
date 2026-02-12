@@ -1,28 +1,24 @@
 # testing implementation of the Moving Average Convergence/ Divergence algorithm
 
-def macd(price: float, prevMACD: float, prevSignal: float, sensitivity: int):
+def macd(price: float, sensitivity: int):
     """
     Calculate MACD for given parameters intended for use inside of a loop
     
     :param price: Current price of stock
     :type price: float
-    :param prevMACD: MACD calculated last iteration
-    :type prevMACD: float
-    :param prevSignal: Signal calculated last iteration
-    :type prevSignal: float
-    :param aggression: How aggressive you want the algorithm to be
-    :type aggression: Int range 0-3
+    :param sensitivity: How aggressive you want the algorithm to be
+    :type sensitivity: Int range 0-3
     :return: 0 is the default return 1 indicates selling is a good idea 2 indicates buying is a good idea
     :rtype: int
     """
     # macd function implementation
-    global sensitivityDICT
-    emaLow = ema(price, "emaLow", sensitivityDict[str(sensitivity)][1])
-    emaHigh = ema(price, "emaHigh", sensitivityDict[str(sensitivity)][2])
+    global sensitivityDict, prevSignal, prevMACD
+    emaFast = ema(price, "fast", sensitivityDict[str(sensitivity)][1])
+    emaSlow = ema(price, "slow", sensitivityDict[str(sensitivity)][2])
     
-    difference12_26 = emaLow - emaHigh
-    results = difference12_26
+    results = emaFast - emaSlow
     signal = ema(results, "signal", sensitivityDict[str(sensitivity)][0])
+
 
     if (prevMACD <= prevSignal) and (results > signal):
         action = 2
@@ -31,12 +27,15 @@ def macd(price: float, prevMACD: float, prevSignal: float, sensitivity: int):
     else:
         action = 0
 
+    prevMACD = results
+    prevSignal = signal 
+
     return action
 
 
 prevEMA = {
-    "emaLow": 0.0,
-    "emaHigh": 0.0,
+    "fast": 0.0,
+    "slow": 0.0,
     "signal": 0.0
 }
 
@@ -47,10 +46,17 @@ sensitivityDict = {
     '3': [3, 5, 13]
 }
 
-def ema(price: float, alphaKey: str, periods: int)->float:
+prevMACD = 0.0
+prevSignal = 0.0
+
+def ema(price: float, key: str, periods: int)->float:
     # estimated moving average function implementation
     global prevEMA
     alpha = 2 / (periods + 1) # smoothing constant
+    
+    if prevEMA[key] != 0.0:
+        prevEMA[key] = alpha * price + (1 - alpha) * prevEMA[key]
+    else:
+        prevEMA[key] = price
 
-    prevEMA[alphaKey] = alpha * price + (1 - alpha) * prevEMA[alphaKey]
-    return prevEMA[alphaKey]
+    return prevEMA[key]
