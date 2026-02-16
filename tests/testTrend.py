@@ -11,16 +11,15 @@ from algorithms.testRSI import rsi
 from algorithms.testATR import atr
 from algorithms.testTrade import trade
 
-from helperFuncions import f20050
+from tests.algorithms.testGoldenCross import f20050
 
 while True:
 
     # import stock data
     stockSymbol = input("Input stock symbol: ").upper()
-    data = yf.download(stockSymbol, start="2024-02-11", end="2026-02-11") # CHANGE THESE DATES FOR TESTING TIMEFRAMES 
-    closePrices = data["Close"][stockSymbol].tolist()
-    highPrices = data["High"][stockSymbol].tolist()
-    lowPrices = data["Low"][stockSymbol].tolist()
+    ticker = yf.Ticker(stockSymbol)
+    data = ticker.history(start = "2025-01-11", interval = "1h") # date to start aquiring data and time interval between samples
+    closePrices = data["Close"].tolist()
 
 
     # change these variables
@@ -44,7 +43,7 @@ while True:
         action = macd(price, macdSensitivity)
 
         action = f20050(price)
-        
+
         # send action to trade function
         if i > 30 and action != 0:
             capital += trade(price, capital, action, ax, i)
