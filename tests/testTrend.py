@@ -11,7 +11,7 @@ from algorithms.testRSI import rsi
 from algorithms.testATR import atr
 from algorithms.testTrade import trade
 
-from tests.algorithms.testGoldenCross import f20050
+from algorithms.testGoldenCross import f20050
 
 while True:
 
