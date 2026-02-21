@@ -1,4 +1,4 @@
-from algorithms.testEMA import ema
+from algorithms.EMA import ema
 
 prevEma50 = 0.0
 prevEma200 = 0.0

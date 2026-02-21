@@ -6,12 +6,12 @@ import matplotlib.pyplot as plt
 import numpy as np 
 
 # import other files
-from algorithms.testMACD import macd
-from algorithms.testRSI import rsi
-from algorithms.testATR import atr
-from algorithms.testTrade import trade
+from algorithms.MACD import macd
+from algorithms.RSI import rsi
+from testAlgorithms.testATR import atr
+from algorithms.trade import trade
 
-from algorithms.testGoldenCross import f20050
+from testAlgorithms.testGoldenCross import f20050
 
 while True:
 

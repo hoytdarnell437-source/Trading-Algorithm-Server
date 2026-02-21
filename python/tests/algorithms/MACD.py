@@ -1,6 +1,6 @@
 # testing implementation of the Moving Average Convergence/ Divergence algorithm
 
-from algorithms.ema import ema
+from algorithms.EMA import ema
 
 def macd(price: float, sensitivity: int):
     """
