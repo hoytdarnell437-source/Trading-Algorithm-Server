@@ -1,5 +1,7 @@
 # testing implementation of the Moving Average Convergence/ Divergence algorithm
 
+from algorithms.ema import ema
+
 def macd(price: float, sensitivity: int):
     """
     Calculate MACD for given parameters intended for use inside of a loop
@@ -29,15 +31,10 @@ def macd(price: float, sensitivity: int):
 
     prevMACD = results
     prevSignal = signal 
+    macdList.append(prevMACD)
+    signalList.append(prevSignal)
 
     return action
-
-
-prevEMA = {
-    "fast": 0.0,
-    "slow": 0.0,
-    "signal": 0.0
-}
 
 sensitivityDict = {
     '0': [18, 24, 52],
@@ -49,14 +46,5 @@ sensitivityDict = {
 prevMACD = 0.0
 prevSignal = 0.0
 
-def ema(price: float, key: str, periods: int)->float:
-    # estimated moving average function implementation
-    global prevEMA
-    alpha = 2 / (periods + 1) # smoothing constant
-    
-    if prevEMA[key] != 0.0:
-        prevEMA[key] = alpha * price + (1 - alpha) * prevEMA[key]
-    else:
-        prevEMA[key] = price
-
-    return prevEMA[key]
+macdList = []
+signalList = []

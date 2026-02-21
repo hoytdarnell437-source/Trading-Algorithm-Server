@@ -1,6 +1,6 @@
 # testing implementation of the Moving Average Convergence/ Divergence algorithm
 
-from algorithms.testEMA import ema
+from algorithms.ema import ema
 
 def macd(price: float, sensitivity: int):
     """
@@ -31,6 +31,8 @@ def macd(price: float, sensitivity: int):
 
     prevMACD = results
     prevSignal = signal 
+    macdList.append(prevMACD)
+    signalList.append(prevSignal)
 
     return action
 
@@ -43,3 +45,6 @@ sensitivityDict = {
 
 prevMACD = 0.0
 prevSignal = 0.0
+
+macdList = []
+signalList = []
