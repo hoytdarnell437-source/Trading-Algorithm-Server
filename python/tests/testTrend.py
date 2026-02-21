@@ -13,7 +13,7 @@ from algorithms.trade import trade
 
 from testAlgorithms.testGoldenCross import f20050
 
-while True:
+def test_trend():
 
     # import stock data
     stockSymbol = input("Input stock symbol: ").upper()
@@ -60,3 +60,6 @@ while True:
     print("Percent Gain in Stock Value: ", f"{(100 * (prices[-1] - prices[0]) / prices[0]):.2f}", "%")
     ax.plot(x, prices)
     plt.show()
+
+if __name__ == "__main__":
+    test_trend()
