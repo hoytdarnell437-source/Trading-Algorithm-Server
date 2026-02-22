@@ -7,7 +7,7 @@ intermediaryHigh = 0.0
 lowBroken = False
 prevPrices = []
 
-def f20050(price: float):
+def goldenCross(price: float):
     global prevEma200, prevEma50, initialLow, intermediaryHigh, lowBroken
     ema50 = ema(price, "50", 50)
     ema200 = ema(price, "200", 200)

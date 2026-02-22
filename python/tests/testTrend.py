@@ -11,7 +11,7 @@ from algorithms.RSI import rsi
 from testAlgorithms.testATR import atr
 from algorithms.trade import trade
 
-from testAlgorithms.testGoldenCross import f20050
+from testAlgorithms.testGoldenCross import goldenCross
 
 def test_trend():
 

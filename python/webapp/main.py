@@ -24,7 +24,7 @@ import testAlgorithms.testGoldenCross as gc_mod
 from algorithms.MACD import macd
 from algorithms.RSI import rsi
 from algorithms.AROON import aroon
-from testAlgorithms.testGoldenCross import f20050
+from testAlgorithms.testGoldenCross import goldenCross
 
 app = FastAPI(title="Trading Algorithm Tester")
 
@@ -44,7 +44,7 @@ ALGO_FUNCS = {
     "macd": macd,
     "rsi": rsi,
     "aroon": aroon,
-    "golden_cross": f20050,
+    "golden_cross": goldenCross,
 }
 
 STOCK_COLORS = [
